@@ -26,17 +26,20 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|max:100',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|min:6',
         ]);
         //create new user
-        $user = User::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
 
         //attempt to login
-        if (Auth::attempt($user)) {
+        if (Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password,
+        ])) {
             $request->session()->regenerate();
             return redirect()->route('home');
         } else {
@@ -58,7 +61,7 @@ class AuthController extends Controller
             'email' => 'required|email|max:255',
             'password' => 'required',
         ]);
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
             return redirect()->route('home');
         } else {
