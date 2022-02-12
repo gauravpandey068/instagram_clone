@@ -25,9 +25,16 @@
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white ">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name') }}
-            </a>
+            @guest
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name') }}
+                </a>
+            @endguest
+            @auth
+                    <a class="navbar-brand" href="{{ route('home') }}">
+                        {{ config('app.name') }}
+                    </a>
+            @endauth
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
