@@ -15,10 +15,13 @@ class AuthController extends Controller
     }
 
     //register new user
-    public function registerView(){
+    public function registerView()
+    {
         return view('auth.register');
     }
-    public function register(Request $request){
+
+    public function register(Request $request)
+    {
         //validate the form data
         $request->validate([
             'name' => 'required|max:100',
@@ -33,19 +36,21 @@ class AuthController extends Controller
         ]);
 
         //attempt to login
-        if(Auth::attempt($user)){
+        if (Auth::attempt($user)) {
             $request->session()->regenerate();
             return redirect()->route('home');
-        }else{
+        } else {
             return redirect()->back();
         }
 
     }
 
     //login user
-    public function loginView(){
+    public function loginView()
+    {
         return view('auth.login');
     }
+
     public function login(Request $request)
     {
         //validate the form data
@@ -56,7 +61,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->route('home');
-        }else{
+        } else {
             return back()->withErrors([
                 'email' => 'The provided credentials do not match our records.',
             ]);
@@ -64,7 +69,8 @@ class AuthController extends Controller
     }
 
     //logout
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         Auth::logout();
 
         $request->session()->invalidate();
