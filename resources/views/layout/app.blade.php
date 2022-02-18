@@ -17,6 +17,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -31,9 +32,9 @@
                 </a>
             @endguest
             @auth
-                    <a class="navbar-brand" href="{{ route('home') }}">
-                        {{ config('app.name') }}
-                    </a>
+                <a class="navbar-brand" href="{{ route('home') }}">
+                    {{ config('app.name') }}
+                </a>
             @endauth
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -56,15 +57,55 @@
                                        aria-label="Search">
                             </form>
                         </li>
+                        <li>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                    data-bs-target="#newPost">
+                                <i class="bi bi-plus"></i>
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="newPost" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{route('post')}}" method="post"
+                                                  enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="mb-3">
+                                                    <label for="image" class="form-label">Image</label>
+                                                    <input type="file" name="image" class="form-control" id="image">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleFormControlTextarea1"
+                                                           class="form-label">Caption</label>
+                                                    <textarea class="form-control" name="caption" id="exampleFormControlTextarea1"
+                                                              rows="4"></textarea>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </li>
                         <!-- Authentication Links -->
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="{{ Auth::user()->profile_pic }}" alt="{{ Auth::user()->name }}" class="rounded-circle" width="30" height="100%">
+                                <img src="{{ Auth::user()->profile_pic }}" alt="{{ Auth::user()->name }}"
+                                     class="rounded-circle" width="30" height="100%">
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="">My Posts</a>
+                                <a class="dropdown-item" href="{{route('myPosts')}}">Profile</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
