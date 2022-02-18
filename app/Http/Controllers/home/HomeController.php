@@ -28,7 +28,7 @@ class HomeController extends Controller
                 'name' => 'required|max:100',
                 'email' => 'required|email|max:255',
             ]);
-        }else{
+        } else {
             $request->validate([
                 'name' => 'required|max:100',
                 'email' => 'required|email|max:255|unique:users',
@@ -41,6 +41,43 @@ class HomeController extends Controller
 
         return redirect()->back();
 
+    }
+
+    public function changePassword(Request $request)
+    {
+        //validate the form data
+        $request->validate([
+            'password' => 'required|min:6',
+        ]);
+
+        $user = Auth::user();
+        $user->password = bcrypt($request->password);
+
+        $user->save();
+
+        Auth::logout();
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
+
+    public function updateProfilePic(Request $request)
+    {
+        //validate
+        $request->validate([
+            'profile_pic' => 'required|image|mimes:jpeg,png,jpg|max:6048',
+        ]);
+        $image_path = $request->file('profile_pic')->store('profiles', 'public');
+
+        $user = Auth::user();
+
+        $user->profile_pic = $image_path;
+
+        $user->save();
+
+        return redirect()->back();
     }
 }
 
