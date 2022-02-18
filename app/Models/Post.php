@@ -11,6 +11,7 @@ class Post extends Model
 
     protected $fillable = ['caption', 'image'];
 
+
     public function user(){
         return $this->belongsTo(User::class);
     }
@@ -18,4 +19,9 @@ class Post extends Model
     public function likes(){
         return $this->hasMany(Like::class);
     }
+
+    public function likedBy(User $user){
+        return $this->likes->contains('user_id', $user->id); // check if user like post or not
+    }
+
 }
