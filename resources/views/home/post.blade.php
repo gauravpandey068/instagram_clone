@@ -35,16 +35,40 @@
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                         <li>
-                                            <p class="dropdown-item">Edit</p>
-                                        </li>
-                                        <li>
-                                            <form action="{{route('destroy', $post->id)}}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="dropdown-item btn btn-white btn-sm" type="submit">Delete</button>
-                                            </form>
+                                            <button class="btn btn-sm btn-white" data-bs-toggle="modal"
+                                                    data-bs-target="#delete">Delete
+                                            </button>
                                         </li>
                                     </ul>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="delete" tabindex="-1"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Delete Post</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body text-primary">
+                                                    Are you sure you want to delete this post?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close
+                                                    </button>
+                                                    <form action="{{route('destroy', $post->id)}}"
+                                                          method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-danger" type="submit">
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             @endif
                         </div>
@@ -63,11 +87,16 @@
                     </div>
                     <div class="card-header bg-white border-top">
                         <div class="d-flex">
-                            <button class="btn btn-white ms-2 p-2"><i class="bi bi-heart"></i></button>
+                            <form action="{{route('like', $post->id)}}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-white ms-2 p-2"><i class="bi bi-heart"></i>
+                                </button>
+
+                            </form>
                             <button class="btn btn-white ms-2 p-2"><i class="bi bi-chat"></i></button>
                         </div>
                         <div class="d-flex">
-                            <p class="ms-2"><span class="fw-bold">2</span> likes</p>
+                            <p class="ms-2"><span class="fw-bold">{{$post->likes->count()}}</span> likes</p>
                             <p class="ms-2"><span class="fw-bold">3</span> comments</p>
 
                         </div>
