@@ -22,42 +22,27 @@
             @foreach($posts as $post)
                 <div class="card m-2" style="width: 40rem;">
                     <div class="card-header bg-white border-white d-flex">
-                        <img src="/storage/{{$post->user->profile_pic}}" width="40" height="40" alt="" class="rounded-circle">
+                        <img src="/storage/{{$post->user->profile_pic}}" width="40" height="40" alt=""
+                             class="rounded-circle">
                         <p class="ms-2 pt-2">{{$post->user->username}}</p>
                     </div>
                     <div class="card-body">
-                        <img src="/storage/{{$post->image}}" alt="{{$post->caption}}" width="100%"  data-bs-toggle="modal" data-bs-target="#view-post-{{$post->id}}">
-                        <p class="fs-4 mt-3" data-bs-toggle="modal" data-bs-target="#view-post-{{$post->id}}">{{$post->caption}}</p>
-                    </div>
-                </div>
-                <!-- Modal -->
-                <div class="modal fade" id="view-post-{{$post->id}}" data-bs-backdrop="static" data-bs-keyboard="false"
-                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body row">
-                                <div class="col-7">
-                                    <img src="/storage/{{$post->image}}" alt="" width="100%" height="100%">
-                                </div>
-                                <div class="col">
-                                    <div class="card-body">
-                                        <p class="fs-4">{{$post->caption}}</p>
-                                        <div class="d-flex">
-                                            <p>like</p>
-                                            <p class="ml-auto">20</p>
-                                        </div>
-                                        <div class="a">
-                                            Comment
-                                        </div>
-                                    </div>
-
-                                </div>
+                        <img src="/storage/{{$post->image}}" alt="{{$post->caption}}" width="100%">
+                        <div class="mt-1">
+                            <div class="d-flex">
+                                <button class="btn btn-white ms-2 p-2"><i class="bi bi-heart"></i></button>
+                                <button class="btn btn-white ms-2 p-2"><i class="bi bi-chat"></i></button>
                             </div>
                         </div>
+                        <p class="mt-3">
+                            {!! nl2br(e(substr($post->caption, 0, 200))) !!} .....
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <form action="">
+                            <input type="text" class="form-control" id="comment"
+                                   placeholder="comment">
+                        </form>
                     </div>
                 </div>
             @endforeach
