@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\home\HomeController;
+use App\Http\Controllers\home\ProfileController;
 use App\Http\Controllers\post\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,9 +32,12 @@ Route::controller(PostController::class)->group(function () {
     Route::post('/post', 'store')->name('post');
 });
 //profile
-Route::get('/user/posts', [HomeController::class, 'myPost'])->name('myPosts');
-Route::patch('/user/edit-profile', [HomeController::class, 'changeProfile'])->name('changeProfile');
-Route::patch('/user/edit-profile/change-password/', [HomeController::class, 'changePassword'])->name('changePassword');
-Route::patch('/user/edit-profile/change-profile-pic', [HomeController::class, 'updateProfilePic'])->name('updateProfilePic');
+Route::controller(ProfileController::class)->group(function () {
+    Route::get('/user/posts', 'profile')->name('myPosts');
+    Route::patch('/user/edit-profile', 'changeProfile')->name('changeProfile');
+    Route::patch('/user/edit-profile/change-password/', 'changePassword')->name('changePassword');
+    Route::patch('/user/edit-profile/change-profile-pic', 'updateProfilePic')->name('updateProfilePic');
+});
+
 
 
