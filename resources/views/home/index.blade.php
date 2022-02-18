@@ -48,9 +48,10 @@
                         </p>
                     </div>
                     <div class="card-footer bg-white">
-                        <form action="">
+                        <form action="{{route('comment', $post->id)}}" method="post">
+                            @csrf
                             <input type="text" class="form-control" id="comment"
-                                   placeholder="comment">
+                                   placeholder="comment" name="comment">
                         </form>
                     </div>
                 </div>
