@@ -7,7 +7,7 @@
         </div>
         <div class="col">
             <div class="d-flex p-3">
-                <div class="fw-bold fs-4">{{auth()->user()->name}}</div>
+                <div class="fw-bold fs-4">{{auth()->user()->username}}</div>
                 <button class="btn btn-light ms-4 border-dark" data-bs-toggle="modal" data-bs-target="#editProfile">
                     Edit Profile
                 </button>
@@ -31,7 +31,10 @@
                     </ul>
                 </div>
             </div>
-            <div class="d-flex mt-5">
+            <div class="fs-5">
+                <div class="p-3">{{auth()->user()->name}}</div>
+            </div>
+            <div class="d-flex mt-2">
                 <div class="p-3"><span class="fw-bold">{{$posts->count()}}</span> posts</div>
                 <div class="p-3"><span class="fw-bold">100</span> followers</div>
                 <div class="p-3"><span class="fw-bold">10</span> following</div>
