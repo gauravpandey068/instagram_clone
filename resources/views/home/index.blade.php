@@ -23,7 +23,7 @@
                 <div class="card m-2" style="width: 40rem;">
                     <div class="card-header bg-white border-white d-flex">
                         <img src="/storage/{{$post->user->profile_pic}}" width="40" height="40" alt="" class="rounded-circle">
-                        <p class="ms-2 pt-2">{{$post->user->name}}</p>
+                        <p class="ms-2 pt-2">{{$post->user->username}}</p>
                     </div>
                     <div class="card-body">
                         <img src="/storage/{{$post->image}}" alt="{{$post->caption}}" width="100%"  data-bs-toggle="modal" data-bs-target="#view-post-{{$post->id}}">
