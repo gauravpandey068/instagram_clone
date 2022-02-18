@@ -12,16 +12,24 @@ class Post extends Model
     protected $fillable = ['caption', 'image'];
 
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function likes(){
+    public function likes()
+    {
         return $this->hasMany(Like::class);
     }
 
-    public function likedBy(User $user){
+    public function likedBy(User $user)
+    {
         return $this->likes->contains('user_id', $user->id); // check if user like post or not
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
 }
