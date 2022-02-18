@@ -3,6 +3,7 @@
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\home\HomeController;
 use App\Http\Controllers\home\ProfileController;
+use App\Http\Controllers\post\LikeController;
 use App\Http\Controllers\post\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,9 @@ Route::controller(ProfileController::class)->group(function () {
     Route::patch('/user/edit-profile/change-password/', 'changePassword')->name('changePassword');
     Route::patch('/user/edit-profile/change-profile-pic', 'updateProfilePic')->name('updateProfilePic');
 });
+
+//post likes
+Route::post('/post/{post}/like', [LikeController::class, 'store'])->name('like');
 
 
 
