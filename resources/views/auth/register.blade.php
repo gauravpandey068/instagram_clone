@@ -32,6 +32,10 @@
                            aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3">
+                    <label for="username" class="form-label">UserName</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
                     <input type="password" class="form-control" name="password" required id="exampleInputPassword1">
                 </div>
