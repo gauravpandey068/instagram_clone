@@ -3,6 +3,7 @@
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\home\HomeController;
 use App\Http\Controllers\home\ProfileController;
+use App\Http\Controllers\post\CommentController;
 use App\Http\Controllers\post\LikeController;
 use App\Http\Controllers\post\PostController;
 use Illuminate\Support\Facades\Route;
@@ -45,5 +46,10 @@ Route::controller(ProfileController::class)->group(function () {
 //post likes
 Route::post('/post/{post}/like', [LikeController::class, 'store'])->name('like');
 
+//Comments
+Route::controller(CommentController::class)->group(function () {
+    Route::post('/post/{post}/comment', 'store')->name('comment');
+    //Route::delete('/post/{post}/comment/{comment}', 'destroy')->name('destroyComment');
+});
 
 
