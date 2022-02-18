@@ -78,12 +78,18 @@
                         <div class="text-black">
                             {!! nl2br(e($post->caption)) !!}
                         </div>
-                        <div class="d-flex mt-3">
-                            <img src="" alt="">
-                            <p class="fw-bold ms-2">Ram</p>
-                            <p class="ms-2">Comments</p>
-                        </div>
-                        <p class="ms-2 mt-0 ">2h</p>
+                        @if($post->comments->count())
+                            @foreach($post->comments as $comment)
+                                <div class="d-flex mt-3">
+                                    <img src="/storage/{{$comment->user->profile_pic}}"
+                                         alt="" class="rounded-circle" height="25" width="25">
+                                    <p class="fw-bold ms-2">{{$comment->user->username}}</p>
+                                    <p class="ms-2">{{$comment->comment}}</p>
+                                </div>
+                                <p class="ms-2 mt-0 ">{{$comment->created_at->diffForHumans()}}</p>
+                            @endforeach
+                        @endif
+
                     </div>
                     <div class="card-header bg-white border-top">
                         <div class="d-flex">
@@ -97,15 +103,16 @@
                         </div>
                         <div class="d-flex">
                             <p class="ms-2"><span class="fw-bold">{{$post->likes->count()}}</span> likes</p>
-                            <p class="ms-2"><span class="fw-bold">3</span> comments</p>
+                            <p class="ms-2"><span class="fw-bold">{{$post->comments->count()}}</span> comments</p>
 
                         </div>
                         <div class="ml-auto">
                             <p class="ms-2">{{$post->created_at->diffForHumans()}}</p>
                         </div>
-                        <form action="" method="post">
+                        <form action="{{route('comment', $post->id)}}" method="post">
+                            @csrf
                             <input type="text" class="form-control" id="comment"
-                                   placeholder="comment">
+                                   placeholder="comment" name="comment">
                         </form>
                     </div>
                 </div>
