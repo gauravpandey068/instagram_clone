@@ -32,9 +32,16 @@
                         </a>
                         <div class="mt-1">
                             <div class="d-flex">
-                                <button class="btn btn-white ms-2 p-2"><i class="bi bi-heart"></i></button>
-                                <button class="btn btn-white ms-2 p-2"><i class="bi bi-chat"></i></button>
+                                <form action="{{route('like', $post->id)}}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-white ms-2 p-2"><i class="bi bi-heart"></i>
+                                    </button>
+
+                                </form>
+                                <a href="{{route('show', $post->id)}}" class="btn btn-white ms-2 p-2"><i
+                                        class="bi bi-chat"></i></a>
                             </div>
+                            <p class="ms-2"><span class="fw-bold">{{$post->likes->count()}}</span> likes</p>
                         </div>
                         <p class="mt-3">
                             {!! nl2br(e(substr($post->caption, 0, 200))) !!} .....
