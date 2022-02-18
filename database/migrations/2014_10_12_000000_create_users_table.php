@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('username')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('profile_pic')->default('https://www.seekpng.com/png/detail/847-8474751_download-empty-profile.png');
+            $table->string('profile_pic')->default('profiles/uO9eCP29p8K5DEMyKmoHddIPIOoCPpH5WnyiJaYz.png');
             $table->rememberToken();
             $table->timestamps();
         });
