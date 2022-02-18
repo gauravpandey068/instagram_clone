@@ -27,7 +27,9 @@
                         <p class="ms-2 pt-2">{{$post->user->username}}</p>
                     </div>
                     <div class="card-body">
-                        <img src="/storage/{{$post->image}}" alt="{{$post->caption}}" width="100%">
+                        <a href="{{route('show', $post->id)}}">
+                            <img src="/storage/{{$post->image}}" alt="{{$post->caption}}" width="100%">
+                        </a>
                         <div class="mt-1">
                             <div class="d-flex">
                                 <button class="btn btn-white ms-2 p-2"><i class="bi bi-heart"></i></button>

@@ -25,7 +25,7 @@ class PostController extends Controller
     {
         //validate form data
         $request->validate([
-            'caption' => 'required',
+            'caption' => 'required|max:500',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:6048',
         ]);
         //save image
@@ -37,5 +37,24 @@ class PostController extends Controller
         ]);
         //redirect to home page
         return redirect()->route('home')->with('success', 'Post created successfully');
+    }
+
+    public function show(Request $request, Post $post)
+    {
+        return view('home.post', compact('post'));
+    }
+    //edit post
+
+
+    //delete post
+    public function destroy(Request $request, Post $post)
+    {
+        if (auth()->user()->id !== $post->user_id) {
+            return redirect()->back()->with('error', 'Unauthorized Page');
+        }
+        //delete image
+        Storage::delete('public/' . $post->image);
+        $post->delete();
+        return redirect()->route('home');
     }
 }

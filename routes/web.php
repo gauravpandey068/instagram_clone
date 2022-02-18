@@ -30,6 +30,8 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(PostController::class)->group(function () {
     Route::get('/home', 'index')->name('home');
     Route::post('/post', 'store')->name('post');
+    Route::get('/post/{post}', 'show')->name('show');
+    Route::delete('/post/{post}', 'destroy')->name('destroy');
 });
 //profile
 Route::controller(ProfileController::class)->group(function () {
