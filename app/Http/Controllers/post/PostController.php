@@ -25,7 +25,7 @@ class PostController extends Controller
     {
         //validate form data
         $request->validate([
-            'caption' => 'required|max:500',
+            'caption' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:6048',
         ]);
         //save image
