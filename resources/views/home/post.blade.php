@@ -86,7 +86,29 @@
                                     <p class="fw-bold ms-2">{{$comment->user->username}}</p>
                                     <p class="ms-2">{{$comment->comment}}</p>
                                 </div>
-                                <p class="ms-2 mt-0 ">{{$comment->created_at->diffForHumans()}}</p>
+                                <div class="d-flex mt-0">
+                                    <p class="ms-2 me-3">{{$comment->created_at->diffForHumans()}}</p>
+                                    @if(auth()->user() == $comment->user)
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-white" type="button"
+                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                <i class="bi bi-three-dots-vertical"></i>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <form action="{{route('deleteComment',[$post->id, $comment->id])}}"
+                                                      method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="dropdown-item" type="submit"><i
+                                                            class="bi bi-trash3"></i>
+                                                    </button>
+                                                </form>
+                                            </ul>
+                                        </div>
+                                    @endif
+
+                                </div>
                             @endforeach
                         @endif
 

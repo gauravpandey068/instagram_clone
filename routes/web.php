@@ -49,7 +49,7 @@ Route::post('/post/{post}/like', [LikeController::class, 'store'])->name('like')
 //Comments
 Route::controller(CommentController::class)->group(function () {
     Route::post('/post/{post}/comment', 'store')->name('comment');
-    //Route::delete('/post/{post}/comment/{comment}', 'destroy')->name('destroyComment');
+    Route::delete('/post/{post}/comment/{comment}', 'destroy')->name('deleteComment');
 });
 
 
