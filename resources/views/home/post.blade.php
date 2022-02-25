@@ -117,8 +117,14 @@
                         <div class="d-flex">
                             <form action="{{route('like', $post->id)}}" method="post">
                                 @csrf
-                                <button type="submit" class="btn btn-white ms-2 p-2"><i class="bi bi-heart"></i>
-                                </button>
+                                @if($post->likedBy(auth()->user()))
+                                    <button type="submit" class="btn btn-white ms-2 p-2"><i
+                                            class="bi bi-heart-fill"></i>
+                                    </button>
+                                @else
+                                    <button type="submit" class="btn btn-white ms-2 p-2"><i class="bi bi-heart"></i>
+                                    </button>
+                                @endif
 
                             </form>
                             <button class="btn btn-white ms-2 p-2"><i class="bi bi-chat"></i></button>
